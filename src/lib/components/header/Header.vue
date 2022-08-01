@@ -1,7 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, toRefs } from "vue";
 
-defineProps<{ msg: string }>();
+const props = defineProps({
+  color: {
+    type: String,
+    required: true,
+    default: "rgb(37, 38, 38)",
+  },
+  msg: {
+    type: String,
+    required: true,
+    default: "",
+  },
+});
+
+const { color, msg } = toRefs(props);
 </script>
 
 
@@ -12,7 +25,9 @@ defineProps<{ msg: string }>();
       <span class="mid-group-title-style el-dropdown-link">{{ msg }}</span>
       <el-dropdown>
         <span class="el-dropdown-link">
-          <el-icon style=" margin-top: 5px;margin-left:6px" color="#FFFFFF"><ArrowDown /></el-icon>
+          <el-icon style="margin-top: 5px; margin-left: 6px" color="#FFFFFF"
+            ><ArrowDown
+          /></el-icon>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -29,13 +44,12 @@ defineProps<{ msg: string }>();
 </template>
 
 <style lang="scss" scoped>
-$bg-color: rgb(37, 38, 38) !default;
 #header {
   width: 100%;
   min-height: 48px;
-  background: $bg-color;
+  background: v-bind(color);
   text-align: center;
-  position: absolute;
+  //position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
